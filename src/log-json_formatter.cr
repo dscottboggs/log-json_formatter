@@ -19,7 +19,7 @@ class ::Log
     end
 
     def self.new(value : JSONFormatter::Loggable)
-      value.to self.class
+      value.to_metadata_value
     end
   end
 
