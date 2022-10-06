@@ -58,7 +58,13 @@ class ::Log
     end
 
     module Loggable
-      abstract def to(cls : Metadata::Value.class) : Metadata::Value
+      abstract def to_metadata_value : ::Log::Metadata::Value
+
+      macro def_to_metadata_value(expr)
+        def to_metadata_value : ::Log::Metadata::Value
+          ::Log::Metadata::Value.new({{expr}})
+        end
+      end
     end
   end
 end

@@ -17,3 +17,15 @@ describe Log::JSONFormatter do
     entry["data"]["value"].as_i.should eq 1
   end
 end
+
+record CustomType, a = 1, b = 2 do
+  include ::Log::JSONFormatter::Loggable
+
+  def_to_metadata_value({a: @a, b: @b})
+end
+
+describe Log::JSONFormatter::Loggable do
+  it "macro works" do
+    CustomType.new.to_metadata_value["a"].should eq 1
+  end
+end

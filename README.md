@@ -21,9 +21,7 @@ require "log-json_formatter"
 record CustomType, a = 1, b = 2 do
   include ::Log::JSONFormatter::Loggable
 
-  def to(cls : ::Log::Metadata::Value) : ::Log::Metadata::Value
-    ::Log::Metadata::Value.new({a: @a, b: @b})
-  end
+  def_to_metadata_value({a: @a, b: @b})
 end
 
 ::Log.setup level: :trace,
